@@ -13,17 +13,20 @@ public class Server {
         System.out.println("\t\t=======================\n\n");
 
         ServerSocket serversocket=new ServerSocket(port);
-        while(true) {
-            Socket socket = serversocket.accept();
-            System.out.println("Client is connected.....\n\n");
+        try {
+            while (true) {
+                Socket socket = serversocket.accept();
+                System.out.println("Client is connected.....\n\n");
 
-            try{
-            PrintWriter out =new PrintWriter(socket.getOutputStream(),true);
-            out.println("Welcome to scoket programming");
-        }finally {
-                socket.close();
+                try {
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    out.println("Welcome to scoket programming");
+                } finally {
+                    socket.close();
+                }
             }
+        }finally {
+            serversocket.close();//when the client is terminated
         }
-
     }
 }
